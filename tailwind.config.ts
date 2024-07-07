@@ -7,10 +7,17 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {
-    extend: {
-      
-    },
+  
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["acid"],
+          primary: "#0079FF",
+
+        },
+      },
+    ]
   },
   plugins: [
     daisyui

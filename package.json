@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@jspreadsheet/react": "^11.4.2",
+    "jspreadsheet": "^11.4.2",
     "next": "14.2.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-spreadsheet": "^0.9.5",
+    "scheduler": "^0.23.2"
   },
   "devDependencies": {
     "@types/node": "^20",
