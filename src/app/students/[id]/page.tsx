@@ -32,6 +32,7 @@ const handleDelete = async() => {
       router.replace('/students')
     }
   } catch (error) {
+    setLoading(false)
     console.log(error);
     
   }

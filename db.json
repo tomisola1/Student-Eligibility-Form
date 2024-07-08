@@ -215,22 +215,162 @@
       ]
     },
     {
-      "id": "954d",
+      "id": "13d3",
       "presentCollege": "Kabe",
       "presentConference": "Tedex",
       "sport": "basketBall",
       "season": "1",
-      "firstName": "Oluwatomisola",
+      "firstName": "Tomisola",
       "lastName": "Solomon",
       "middleName": "",
-      "gender": "male",
+      "gender": "female",
       "studentId": "ST792792",
       "todayDate": "2024-07-08",
       "address": "1 Stanley Oyewole Street Gemade Estate Ipaja",
       "phoneNumber": "8108477169",
-      "dob": "2005-02-08",
+      "dob": "2002-02-08",
       "highSchool": "Jext",
-      "lastDate": "2013-06-05",
+      "lastDate": "2016-06-08",
+      "education": [
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ],
+      "activities": [
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "id": "73b4",
+      "presentCollege": "Kabe",
+      "presentConference": "Tedex",
+      "sport": "basketBall",
+      "season": "1",
+      "firstName": "Tomisola",
+      "lastName": "Solomon",
+      "middleName": "",
+      "gender": "female",
+      "studentId": "ST792792",
+      "todayDate": "2024-07-08",
+      "address": "1 Stanley Oyewole Street Gemade Estate Ipaja",
+      "phoneNumber": "8108477169",
+      "dob": "2002-02-08",
+      "highSchool": "Jext",
+      "lastDate": "2016-06-08",
+      "education": [
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ],
+      "activities": [
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "id": "c69f",
+      "presentCollege": "Kabe",
+      "presentConference": "Tedex",
+      "sport": "basketBall",
+      "season": "1",
+      "firstName": "Tomisola",
+      "lastName": "Solomon",
+      "middleName": "",
+      "gender": "female",
+      "studentId": "ST792792",
+      "todayDate": "2024-07-08",
+      "address": "1 Stanley Oyewole Street Gemade Estate Ipaja",
+      "phoneNumber": "8108477169",
+      "dob": "2002-02-08",
+      "highSchool": "Jext",
+      "lastDate": "2016-06-08",
       "education": [
         [
           "",

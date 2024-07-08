@@ -22,6 +22,7 @@ const StudentList = () => {
     
             fetchStudents()     
         } catch (error) {
+            setLoading(false)
             console.log(error);     
         }
     },[])

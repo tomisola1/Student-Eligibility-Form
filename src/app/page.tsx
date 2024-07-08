@@ -248,10 +248,11 @@ const Form2 = (props:FormProps) => {
     try {
       setLoading(true)
       const student = await createStudent(data)
-    
-      setLoading(false)
-      router.push("students")
-      
+      if(student){
+        router.push("students")
+        setLoading(false)
+
+      }
     } catch (error) {
       // console.log(error);
       
