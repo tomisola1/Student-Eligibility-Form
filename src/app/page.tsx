@@ -3,15 +3,40 @@
 import Image from "next/image";
 import InputField from "./components/InputField";
 import SelectInput from "./components/SelectInput";
-import { useRef, useState } from "react";
+import { ErrorInfo, useRef, useState } from "react";
 import RadioInput from "./components/RadioInput";
 import { Spreadsheet, Worksheet, jspreadsheet } from "@jspreadsheet/react";
 import "jsuites/dist/jsuites.css";
 import "jspreadsheet/dist/jspreadsheet.css";
+import * as Yup from 'yup';
+import { Errors, StudentProps } from "./types";
 
 
 export default function Home() {
   const [currentForm, setCurrentForm] = useState(1)
+  const [formData, setFormData] = useState({
+    presentCollege: '',
+    presentConference: '',
+    sport: '',
+    season: '',
+    firstName: '',
+    lastName: '',
+    middleName: '',
+    gender: '',
+    studentId: '',
+    todayDate: '',
+    address: '',
+    phoneNumber: '',
+    dob: '',
+    highSchool: '',
+    lastDate: ''
+  })
+
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const {name, value} = event.target
+    setFormData((prev)=>({...prev, [name]: value}))
+  }
+
   const changeForm = () => {
     setCurrentForm(prev => prev + 1)
  }
@@ -29,8 +54,8 @@ export default function Home() {
           </div>
           {
             currentForm === 1 ?
-                <Form1  changeForm={changeForm} /> :
-                <Form2  goBack={goBack} />
+                <Form1 formData={formData} handleChange={handleChange} changeForm={changeForm} /> :
+                <Form2 formData={formData} handleChange={handleChange} goBack={goBack} />
           }
       </div>
       </div>
@@ -39,46 +64,104 @@ export default function Home() {
 }
 
 type FormProps = {
+  formData: StudentProps
+  handleChange: (e:React.ChangeEvent<HTMLInputElement>) => void
   changeForm?: () => void
   goBack?: () => void
 }
 
+const validationSchema = Yup.object().shape({
+  presentCollege: Yup.string().required('Present College is required'),
+  presentConference: Yup.string().required('Present Conference is required'),
+  sport: Yup.string().required('Sport is required'),
+  season: Yup.string().required('Season is required'),
+  firstName: Yup.string().required('First name is required'),
+  lastName: Yup.string().required('Last name is required'),
+  middleName: Yup.string(),
+  gender: Yup.string().required('Gender is required'),
+  studentId: Yup.string().required('StudentId is required'),
+  todayDate: Yup.string().required('Today\'s date is required'),
+  address: Yup.string().required('Address is required'),
+  phoneNumber: Yup.string().matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits').required('Phone number is required'),
+  dob: Yup.date().required('Date of birth is required')
+  .test('dob', 'Must be greater than 18', function (value, ctx) {
+    const dob = new Date(value);
+    const validDate = new Date();
+    const valid = validDate.getFullYear() - dob.getFullYear() >= 18;
+    return !valid ? ctx.createError() : valid; 
+  }),
+  highSchool: Yup.string().required('High school last attended is required'),
+  lastDate: Yup.date().required('Last date attended is required'),
+});
+
 
 const Form1 = (props:FormProps) => {
+  const [error, setError] = useState<Errors>({})
+  const { handleChange, formData, changeForm} = props
   const sports = [
     {option: "Basket ball", value: "basketBall"},
     {option: "Soccer", value: "soccer"},
     {option: "Volley ball", value: "volleyBall"},
   ]
+
+console.log(formData);
+  const changePage = async() => {
+    try {
+      const errors = await validationSchema.validate(formData, { abortEarly: false });
+      console.log(errors);
+      
+      if (changeForm)changeForm()
+      // return
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const validationErrors: Errors = {};
+          err.inner.forEach((error) => {
+            if (error.path) {
+              validationErrors[error.path as keyof Errors] = error.message;
+            }
+          });
+          setError(validationErrors);
+          console.log(error);
+          
+        } else {
+          console.error('Unexpected error:', err);
+        }
+       
+    }
+    
+  };
+  
+
+
   return (
     <div>
          
           <form action="" className="px-6 mt-10">
               <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5">
-                  <InputField label="Your Present College" name="presentColleger" placeholder="Enter present college" required/>
-                  <InputField label="Your Present Conference" name="presentConference" placeholder="Enter present conference"  required/>
-                  <SelectInput label="Sports this Season" name="sport" data={sports} placeholder="Select sports" required/>
-                  <RadioInput name="season" label="Previous Seasons of Completion Used in This Sport" radioOptions={[
+                  <InputField label="Your Present College" name="presentCollege" placeholder="Enter present college" onChange={handleChange} error={error.presentCollege} required/>
+                  <InputField label="Your Present Conference" name="presentConference" placeholder="Enter present conference" onChange={handleChange} error={error.presentConference} required/>
+                  <SelectInput label="Sports this Season" name="sport" data={sports} defaultText="Select sports" onChange={handleChange} error={error.sport} required/>
+                  <RadioInput name="season" label="Previous Seasons of Completion Used in This Sport" onChange={handleChange} radioOptions={[
                     {option: "0",value: "0"},
                     {option: "1",value: "1"}
-                  ]} required/>
-                  <InputField label="First Name" name="firstName" placeholder="Enter first name"  required/>
-                  <InputField label="Last Name" name="lastName" placeholder="Enter last name"  required/>
-                  <InputField label="Middle Name" name="middleName" placeholder="Enter middle name"/>
-                  <RadioInput name="gender" label="Gender" radioOptions={[
+                  ]} error={error.season} required/>
+                  <InputField label="First Name" name="firstName" placeholder="Enter first name" onChange={handleChange} error={error.firstName} required/>
+                  <InputField label="Last Name" name="lastName" placeholder="Enter last name" onChange={handleChange} error={error.lastName} required/>
+                  <InputField label="Middle Name" name="middleName" placeholder="Enter middle name" onChange={handleChange} />
+                  <RadioInput name="gender" label="Gender" onChange={handleChange} radioOptions={[
                     {option: "Male",value: "male"},
                     {option: "Female",value: "female"}
-                  ]} required/>
-                  <InputField label="Student ID" name="studentId" placeholder="Enter student ID" required/>
-                  <InputField label="Today's Date" name="todayDate" type="date" required/>
-                  <InputField label="Address" name="address" placeholder="Enter address" required/>
-                  <InputField label="Phone Number" name="phoneNumber" placeholder="Enter phone number" required/>
-                  <InputField label="Date of Birth" name="dob" type="date" required/>
-                  <InputField label="High School Last Attended" name="highSchool" placeholder="Enter high school" required/>
-                  <InputField label="Last Date Attended" name="lastDate" type="date" required/>
+                  ]} error={error.gender} required/>
+                  <InputField label="Student ID" name="studentId" placeholder="Enter student ID" onChange={handleChange} error={error.studentId} required/>
+                  <InputField label="Today's Date" name="todayDate" type="date" onChange={handleChange} error={error.todayDate} required/>
+                  <InputField label="Address" name="address" placeholder="Enter address" onChange={handleChange} error={error.address} required/>
+                  <InputField label="Phone Number" name="phoneNumber" placeholder="Enter phone number" onChange={handleChange} error={error.phoneNumber} required/>
+                  <InputField label="Date of Birth" name="dob" type="date" max={"2006/"} onChange={handleChange} error={error.dob} required/>
+                  <InputField label="High School Last Attended" name="highSchool" placeholder="Enter high school" onChange={handleChange} error={error.highSchool} required/>
+                  <InputField label="Last Date Attended" name="lastDate" type="date" onChange={handleChange} error={error.lastDate} required/>
               </div>
               <div className="flex justify-end mt-10">
-                <button className="btn btn-outline btn-primary w-[200px] text-base font-semibold rounded-3xl !hover:text-white" onClick={props.changeForm}>Continue</button>
+                <button className="btn btn-outline btn-primary w-[200px] text-base font-semibold rounded-3xl !hover:text-white" onClick={changePage} type="button">Continue</button>
               </div>
           </form>
 

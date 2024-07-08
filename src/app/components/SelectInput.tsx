@@ -5,15 +5,15 @@ const SelectInput: React.FC<SelectProps> = ({ ...props }) => {
     label,
     name,
     className,
-    placeholder,
-    type = "text",
     required = false,
+    defaultText,
     defaultValue,
     id,
     onChange,
     data,
     value,
     autoComplete,
+    error,
     ...rest
   } = props;
 
@@ -37,17 +37,18 @@ const SelectInput: React.FC<SelectProps> = ({ ...props }) => {
           value={value}
           onChange={onChange}
           autoComplete={autoComplete}
-          className="border-solid border border-slate-300 rounded-lg py-3 px-3.5 shadow focus:outline-none focus:border-primary w-full mt-2 bg-transparent text-#667085]"
+          className={`border-solid border ${error && "border-red-500"} border-slate-300 rounded-lg py-3 px-3.5 shadow focus:outline-none focus:border-primary w-full mb-1.5 mt-2 bg-transparent text-zinc-400 text-sm ${className}`}
           required={required}
         >
-          <option value="">{placeholder}</option>
+          <option value="">{defaultText}</option>
           {data &&
-            data.map((item: any, index) => (
+            data.map((item, index) => (
               <option key={index} value={item.value}>
                 {item.option}
               </option>
             ))}
         </select>
+        {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>
     </div>
   );
@@ -55,13 +56,15 @@ const SelectInput: React.FC<SelectProps> = ({ ...props }) => {
 
 export default SelectInput;
 
-interface SelectProps extends React.InputHTMLAttributes<any> {
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   className?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement> | any;
+  onChange: React.ChangeEventHandler<HTMLSelectElement | HTMLInputElement>;
   required?: boolean;
   data: Array<{
     option: string;
     value: string;
   }>;
+  error?: string;
+  defaultText: string;
 }

@@ -11,8 +11,10 @@ const RadioInput:React.FC<RadioProps> = ({ ...props }) => {
 		onChange,
         value,
         radioOptions,
+        error,
 		...rest
 	} = props;
+    
   return (
     <div>
       <label htmlFor={name} className="text-sm text-[#464646]">
@@ -30,26 +32,27 @@ const RadioInput:React.FC<RadioProps> = ({ ...props }) => {
                 <div className="form-control" key={index}>
                 <label className="flex items-center gap-2">
                     <span className="">{option.option}</span>
-                    <input type="radio" name={name} value={option.value} className={`radio ${className}`} required={required} />
+                    <input type="radio" name={name} value={option.value} className={`${error && 'radio-error'} radio ${className}`} onChange={onChange} required={required} />
                 </label>
                 </div>
             ))
         }
       </div>
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
 };
 
 export default RadioInput;
 
-interface RadioProps extends React.InputHTMLAttributes<any> {
+interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	label?: string;
 	className?: string;
 	onChange?:
-	| React.ChangeEventHandler<HTMLInputElement>
-	| any;
+	| React.ChangeEventHandler<HTMLInputElement>;
 	required?: boolean;
     radioOptions: Array<{
         option: string, value: string
     }>
+    error?: string
 }
