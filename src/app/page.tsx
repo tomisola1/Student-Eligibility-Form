@@ -10,6 +10,8 @@ import "jsuites/dist/jsuites.css";
 import "jspreadsheet/dist/jspreadsheet.css";
 import * as Yup from 'yup';
 import { Errors, StudentProps } from "./types";
+import { useRouter } from "next/navigation";
+import { createStudent } from "./services";
 
 
 export default function Home() {
@@ -29,7 +31,9 @@ export default function Home() {
     phoneNumber: '',
     dob: '',
     highSchool: '',
-    lastDate: ''
+    lastDate: '',
+    education:[],
+    activities:[],
   })
 
   const handleChange = (event:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -80,7 +84,7 @@ const validationSchema = Yup.object().shape({
   middleName: Yup.string(),
   gender: Yup.string().required('Gender is required'),
   studentId: Yup.string().required('StudentId is required'),
-  todayDate: Yup.string().required('Today\'s date is required'),
+  todayDate: Yup.date().required('Today\'s date is required'),
   address: Yup.string().required('Address is required'),
   phoneNumber: Yup.string().matches(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits').required('Phone number is required'),
   dob: Yup.date().required('Date of birth is required')
@@ -92,6 +96,21 @@ const validationSchema = Yup.object().shape({
   }),
   highSchool: Yup.string().required('High school last attended is required'),
   lastDate: Yup.date().required('Last date attended is required'),
+  education: Yup.array(Yup
+    .object({ 
+      From: Yup.date(),
+      To:  Yup.date(),
+      collegeAttended:Yup.string()
+    })),
+  activities: Yup.array(Yup
+    .object({ 
+      sports: Yup.string(),
+      college: Yup.string(),
+      varsityOrClub: Yup.string(),
+      semester: Yup.string(),
+      year: Yup.string()
+    })),
+
 });
 
 
@@ -172,6 +191,9 @@ console.log(formData);
 jspreadsheet.setLicense('NWNkYjAxZWEwYTc3MWYzNzgxYTk1ODAzNGU4NzE5OGUyZTU3OWZlNjkxZTBiM2VjYjAxYThhMTIwMmM0ODdjOWExYzA0ZDRkZjdkMTZjZDlmZTZjYmVhMzcwNTJjZmY4ODc0YzYwMjJhYmFhYWQ3NzY2MDFhMjU3Y2MzYTE0NzUsZXlKamJHbGxiblJKWkNJNklqRmxPVGcxTUdZeFl6bGxZakppTXpVMVlqVXlaakpqWkdReU1HSXhOekV6WlRBMVkyUTJaVE1pTENKdVlXMWxJam9pVkc5dGFYTnZiR0VpTENKa1lYUmxJam94TnpJeU9UZzFNakF3TENKa2IyMWhhVzRpT2xzaWQyVmlJaXdpYkc5allXeG9iM04wSWwwc0luQnNZVzRpT2pNeExDSnpZMjl3WlNJNld5SjJOeUlzSW5ZNElpd2lkamtpTENKMk1UQWlMQ0oyTVRFaUxDSm1iM0p0ZFd4aElpd2labTl5YlhNaUxDSnlaVzVrWlhJaUxDSndZWEp6WlhJaUxDSnBiWEJ2Y25SbGNpSXNJbk5sWVhKamFDSXNJbU52YlcxbGJuUnpJaXdpZG1Gc2FXUmhkR2x2Ym5NaUxDSmphR0Z5ZEhNaUxDSndjbWx1ZENJc0ltSmhjaUlzSW5Ob1pXVjBjeUlzSW5Ob1lYQmxjeUlzSW5ObGNuWmxjaUpkZlE9PQ==');
 
 const Form2 = (props:FormProps) => {
+  const {formData} = props
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
   const spreadsheet1 = useRef<any>(null);
   const spreadsheet2 = useRef<any>(null);
 
@@ -213,14 +235,38 @@ const Form2 = (props:FormProps) => {
       width:"100px"
     },
   ]
+
+  const handleSubmit = async(e:React.FormEvent) => {
+    e.preventDefault()
+    const tableData1 = spreadsheet1.current[0].getData({highlighted: true,processed: true})
+    const tableData2 = spreadsheet2.current[0].getData({highlighted: true, processed: true})
+    const data = {
+      ...formData,
+      education:tableData1,
+      activities:tableData2
+    }
+    try {
+      setLoading(true)
+      const student = await createStudent(data)
+    
+      setLoading(false)
+      router.push("students")
+      
+    } catch (error) {
+      // console.log(error);
+      
+    }
+  }
+  
+
   return (
     <div>
-      <form action="" className="px-6 mt-10">
+      <form onSubmit={handleSubmit} className="px-6 mt-10">
       <div >
         <p className="mb-5 text-base">Accurately account for all your time between high school graduation and the present. Beginning with the year you left high school, list employment dates, periods of unemployment, armed forces service, and all educational institutions in which you have registered, including your present college. <b>Do not include summer school</b> . <b>Do not include summer jobs.</b> </p>
 
         <Spreadsheet ref={spreadsheet1}>
-            <Worksheet minDimensions={[3, 4]} columns={columns1}/>
+            <Worksheet minDimensions={[3, 4]} columns={columns1} />
         </Spreadsheet>
       
         <div className="flex gap-5 mt-4">
@@ -250,7 +296,7 @@ const Form2 = (props:FormProps) => {
       </div>
         <div className="flex justify-between mt-10">
           <button className="btn btn-outline btn-primary w-[200px] text-base font-semibold rounded-3xl" onClick={props.goBack}>Go back</button>
-          <button className="btn btn-primary w-[200px] text-base font-semibold rounded-3xl">Submit</button>
+          <button className="btn btn-primary w-[200px] text-base font-semibold rounded-3xl">{loading && <span className="loading loading-dots loading-md"></span> }Submit</button>
         </div>
       </form>
     </div>

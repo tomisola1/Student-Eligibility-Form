@@ -15,7 +15,10 @@ Second, run the development server:
 npm run dev
 
 ```
+Third, run the json server:
 
+```bash
+npm run json-server
 
 ## Deploy on Vercel
 

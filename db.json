@@ -1,0 +1,288 @@
+{
+  "students": [
+    {
+      "id": "87f3",
+      "presentCollege": "Kabe",
+      "presentConference": "Tedex",
+      "sport": "basketBall",
+      "season": "1",
+      "firstName": "Tomisola",
+      "lastName": "Solomon",
+      "middleName": "",
+      "gender": "female",
+      "studentId": "ST792792",
+      "todayDate": "2024-07-08",
+      "address": "1 Stanley Oyewole Street Gemade Estate Ipaja",
+      "phoneNumber": "8108477169",
+      "dob": "1995-06-09",
+      "highSchool": "Jext",
+      "lastDate": "2015-07-18",
+      "education": [
+        [
+          "2012-07-01 00:00:00",
+          "2020-07-08 00:00:00",
+          "Houston College of Medicine"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ],
+      "activities": [
+        [
+          "2012-07-01 00:00:00",
+          "2020-07-08 00:00:00",
+          "Houston College of Medicine"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "id": "b205",
+      "presentCollege": "Kabe",
+      "presentConference": "Tedex",
+      "sport": "basketBall",
+      "season": "1",
+      "firstName": "Tomisola",
+      "lastName": "Solomon",
+      "middleName": "",
+      "gender": "female",
+      "studentId": "ST792792",
+      "todayDate": "2024-07-08",
+      "address": "1 Stanley Oyewole Street Gemade Estate Ipaja",
+      "phoneNumber": "8108477169",
+      "dob": "1998-06-08",
+      "highSchool": "Jext",
+      "lastDate": "2015-07-08",
+      "education": [
+        [
+          "2015-07-08 00:00:00",
+          "2019-07-08 00:00:00",
+          "MIT"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ],
+      "activities": [
+        [
+          "2015-07-08 00:00:00",
+          "2019-07-08 00:00:00",
+          "MIT"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "id": "9cc6",
+      "presentCollege": "Kabe",
+      "presentConference": "Tedex",
+      "sport": "soccer",
+      "season": "1",
+      "firstName": "Tomisola",
+      "lastName": "Solomon",
+      "middleName": "",
+      "gender": "female",
+      "studentId": "ST792792",
+      "todayDate": "2024-07-08",
+      "address": "1 Stanley Oyewole Street Gemade Estate Ipaja",
+      "phoneNumber": "8108477169",
+      "dob": "1994-01-08",
+      "highSchool": "Jext",
+      "lastDate": "2017-02-08",
+      "education": "[[\"2013-07-08 00:00:00\",\"2018-07-08 00:00:00\",\"MIT\"],[\"\",\"\",\"\"],[\"\",\"\",\"\"],[\"\",\"\",\"\"]]",
+      "activities": "[[\"Soccer\",\"MIT\",\"none\",\"spring\",2015],[\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\"],[\"\",\"\",\"\",\"\",\"\"]]"
+    },
+    {
+      "id": "6bd5",
+      "presentCollege": "Kabe",
+      "presentConference": "Tedex",
+      "sport": "basketBall",
+      "season": "1",
+      "firstName": "Tomisola",
+      "lastName": "Solomon",
+      "middleName": "",
+      "gender": "male",
+      "studentId": "ST792792",
+      "todayDate": "2024-07-08",
+      "address": "1 Stanley Oyewole Street Gemade Estate Ipaja",
+      "phoneNumber": "8108477169",
+      "dob": "1999-01-08",
+      "highSchool": "Jext",
+      "lastDate": "2024-07-03",
+      "education": [
+        [
+          "2013-07-01 00:00:00",
+          "2020-07-01 00:00:00",
+          "MIT"
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ],
+      "activities": [
+        [
+          "Soccer",
+          "MIT",
+          "none",
+          "Spring",
+          2023
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "id": "954d",
+      "presentCollege": "Kabe",
+      "presentConference": "Tedex",
+      "sport": "basketBall",
+      "season": "1",
+      "firstName": "Oluwatomisola",
+      "lastName": "Solomon",
+      "middleName": "",
+      "gender": "male",
+      "studentId": "ST792792",
+      "todayDate": "2024-07-08",
+      "address": "1 Stanley Oyewole Street Gemade Estate Ipaja",
+      "phoneNumber": "8108477169",
+      "dob": "2005-02-08",
+      "highSchool": "Jext",
+      "lastDate": "2013-06-05",
+      "education": [
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          ""
+        ]
+      ],
+      "activities": [
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      ]
+    }
+  ]
+}
